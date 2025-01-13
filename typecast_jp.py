@@ -1,9 +1,9 @@
-#typecast.py
+#typecast_jp.py
 import requests
 import json
 import time
 from flask import Blueprint, jsonify, request, send_file
-import os
+
 
 
 typecastjp_bp = Blueprint('typecastjp', __name__)
@@ -78,21 +78,8 @@ def poll_synthesis_status(speak_id):
         
         time.sleep(1)  # 1초 기다리고 다시 반복
     
-    return None
+    return audio_url
 
-
-# 3. 파일 다운로드
-def speaker_audio(speak_url, output_file="castjp.wav"):
-    response = requests.get(speak_url)
-
-    
-    if response.status_code == 200:
-        with open(output_file, "wb") as file:
-            file.write(response.content)
-        print(f"Audio file downloaded successfully: {output_file}")
-    else:
-        print(f"Error downloading audio file: {response.status_code}")
-        print(response.text)
 
 
 #음성변환 
@@ -101,14 +88,9 @@ def transcribe_and_synthesize(clean_text):
     speak_id = start_speech_synthesis(clean_text)
     
     if speak_id:
-        speak_url = poll_synthesis_status(speak_id)
+        audio_url = poll_synthesis_status(speak_id)
+        return audio_url
         
-        if speak_url:
-            speaker_audio(speak_url)
-            
-
-    print("음성 저장 성공 'castjp.wav'.")
-
 
 @typecastjp_bp.route('/download_audio', methods=['GET', 'POST'])
 def download_audio():
@@ -118,11 +100,11 @@ def download_audio():
         return jsonify({'error': '텍스트 데이터가 제공되지 않았습니다.'}), 400
 
     text = data['text']
-    transcribe_and_synthesize(text)  # TTS 변환 함수 호출
+    audio_url = transcribe_and_synthesize(text) 
 
-    tts_output_path = "castjp.wav"
-    if os.path.exists(tts_output_path):
-        return send_file(tts_output_path, as_attachment=True)
-    else:
-        return jsonify({'error': 'Audio file not found'}), 404
+    if not audio_url:
+        return jsonify({'error': '오디오 변환에 실패했습니다.'}), 500
+
+    # 오디오 파일을 직접 보내는 대신 JSON으로 URL만 응답
+    return jsonify({'audioUrl': audio_url}), 200
 

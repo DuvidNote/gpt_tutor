@@ -26,7 +26,7 @@ def wait_on_run(run, thread):
 def gpt(assistant_ID,transcribed_text):
 
     assistant = client.beta.assistants.retrieve(assistant_id=assistant_ID)  # Replace with your actual assistant ID
-    thread = client.beta.threads.retrieve('thread_vAJ26BedoDWtr6PREnztVZWf')
+    thread = client.beta.threads.retrieve('thread_qy8Sp2nYOYwVHSPGTmFUtIge')
 
     print("GPT로 보내는중...")
     message = client.beta.threads.messages.create(

@@ -103,7 +103,7 @@ def download_audio():
 
     text = data['text']
 
-    match = re.search(r"영어\s*:\s*\[(.*?)\]", text)
+    match = re.search(r"\[(.*?)\]", text)
     if match:
         english_text = match.group(1)  # 영어 문장 추출
     else:

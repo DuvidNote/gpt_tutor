@@ -79,7 +79,7 @@ def poll_synthesis_status(speak_id):
         
         time.sleep(1)  # 1초 기다리고 다시 반복
     
-        return audio_url
+    return audio_url
 
 
 

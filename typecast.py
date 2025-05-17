@@ -11,7 +11,7 @@ typecast_bp = Blueprint('typecast', __name__)
 
 #typecast
 url = "https://typecast.ai/api/speak"
-API_TOKEN = "Bearer __pltVYScreJaFDNhLMZxhzGjBdQTn47e2GM52V3MVHKJ"
+API_TOKEN = "MY_API"
 HEADERS = {
     "Authorization": API_TOKEN,
     "Content-Type": "application/json"

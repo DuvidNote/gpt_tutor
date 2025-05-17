@@ -13,7 +13,7 @@ History_check= 'asst_Nqqp1yB2oGRQKZkNSaLvH324'
 selected_assistant_id = None
 
 # OpenAi Assistant Ai
-client = OpenAI(api_key='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')  # Replace with your actual API key
+client = OpenAI(api_key='MY_API')  
 
 
 def wait_on_run(run, thread):

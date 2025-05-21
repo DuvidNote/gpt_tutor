@@ -5,10 +5,10 @@ from flask import Blueprint, request, jsonify
 
 gpt_bp = Blueprint('gpt', __name__)
 
-Science = 'asst_l2PKoDqdiDTUbIUFCLJl1q9c'
-Science_check = 'asst_Nqqp1yB2oGRQKZkNSaLvH324'
-History = 'asst_th52GAMXiPc6hQqDun17yOHw'
-History_check= 'asst_Nqqp1yB2oGRQKZkNSaLvH324'
+Science = 'Asst_API'
+Science_check = 'Asst_API'
+History = 'Asst_API'
+History_check= 'Asst_API'
 
 selected_assistant_id = None
 
